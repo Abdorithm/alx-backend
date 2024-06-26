@@ -17,7 +17,7 @@ class BasicCache(BaseCaching):
         """
         Initialize the class using the parent class __init__ method
         """
-        BaseCaching.__init__(self)
+        super().__init__()
 
     def put(self, key, item):
         """
@@ -39,4 +39,3 @@ class BasicCache(BaseCaching):
         if key is not None and key in self.cache_data.keys():
             return self.cache_data[key]
         return None
-    
