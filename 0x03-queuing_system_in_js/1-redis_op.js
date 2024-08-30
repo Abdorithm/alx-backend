@@ -30,15 +30,10 @@ function displaySchoolValue(schoolName) {
   });
 }
 
-function main() {
-  client.connect();
-  
-  // Queue commands to be executed once the connection is established
+client.connect().then(() => {
   displaySchoolValue('Holberton');
   setNewSchool('HolbertonSanFrancisco', '100');
   displaySchoolValue('HolbertonSanFrancisco');
-}
-
-main();
-
-// I dont know why callbacks are not working
+}).catch((err) => {
+  console.error('Error connecting:', err);
+});
