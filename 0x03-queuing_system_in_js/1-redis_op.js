@@ -4,6 +4,9 @@ const client = createClient();
 
 client.on('connect', () => {
   console.log('Redis client connected to the server');
+  displaySchoolValue('Holberton');
+  setNewSchool('HolbertonSanFrancisco', '100');
+  displaySchoolValue('HolbertonSanFrancisco');
 });
 
 client.on('error', (err) => {
@@ -12,18 +15,22 @@ client.on('error', (err) => {
 
 function setNewSchool(schoolName, value) {
   client.set(schoolName, value, (err, reply) => {
-    redis.print(`Reply: ${reply}`);
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('Reply:', reply);
+    }
   });
 }
 
 function displaySchoolValue(schoolName) {
   client.get(schoolName, (err, reply) => {
-    console.log(reply);
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(reply);
+    }
   });
 }
 
 client.connect();
-
-displaySchoolValue('Holberton');
-setNewSchool('HolbertonSanFrancisco', '100');
-displaySchoolValue('HolbertonSanFrancisco');
