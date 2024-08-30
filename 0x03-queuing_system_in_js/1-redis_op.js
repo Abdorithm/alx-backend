@@ -4,9 +4,6 @@ const client = createClient();
 
 client.on('connect', () => {
   console.log('Redis client connected to the server');
-  displaySchoolValue('Holberton');
-  setNewSchool('HolbertonSanFrancisco', '100');
-  displaySchoolValue('HolbertonSanFrancisco');
 });
 
 client.on('error', (err) => {
@@ -33,4 +30,15 @@ function displaySchoolValue(schoolName) {
   });
 }
 
-client.connect();
+function main() {
+  client.connect();
+  
+  // Queue commands to be executed once the connection is established
+  displaySchoolValue('Holberton');
+  setNewSchool('HolbertonSanFrancisco', '100');
+  displaySchoolValue('HolbertonSanFrancisco');
+}
+
+main();
+
+// I dont know why callbacks are not working
